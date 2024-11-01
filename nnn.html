@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nnn 2024 Counter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #282c34;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        .counter {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            margin: 10px;
+            width: 300px;
+        }
+        .counter-header {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        .counter-time {
+            font-size: 1.2em;
+        }
+        @media (max-width: 400px) {
+            .counter {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>No Nut November 2024</h1>
+    <div class="counter" id="elapsedCounter">
+        <div class="counter-header">Elapsed Time since start of nnn</div>
+        <div class="counter-time" id="elapsedTime"></div>
+    </div>
+    <div class="counter" id="remainingCounter">
+        <div class="counter-header">Time Remaining until end of nnn</div>
+        <div class="counter-time" id="remainingTime"></div>
+    </div>
+
+    <script>
+        const startTime = new Date('2024-11-01T00:00:00'); // Start of No Nut November
+        const endTime = new Date('2024-12-01T00:00:00');   // End of No Nut November
+
+        function updateCounters() {
+            const now = new Date();
+
+            // Elapsed time since Nov 1st
+            const elapsed = now - startTime;
+            const daysElapsed = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+            const hoursElapsed = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutesElapsed = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsElapsed = Math.floor((elapsed % (1000 * 60)) / 1000);
+            
+            // Remaining time until Dec 1
+            const remaining = endTime - now;
+            const daysRemaining = Math.floor(remaining / (1000 * 60 * 60 * 24));
+            const hoursRemaining = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutesRemaining = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsRemaining = Math.floor((remaining % (1000 * 60)) / 1000);
+            
+            // Update the counters on the webpage
+            document.getElementById('elapsedTime').innerHTML = 
+                `${daysElapsed}d ${hoursElapsed}h ${minutesElapsed}m ${secondsElapsed}s`;
+            
+            document.getElementById('remainingTime').innerHTML = 
+                `${daysRemaining}d ${hoursRemaining}h ${minutesRemaining}m ${secondsRemaining}s`;
+        }
+
+        // Update the counters every second
+        setInterval(updateCounters, 1000);
+        updateCounters(); // Initial call to display immediately
+    </script>
+
+</body>
+</html>
